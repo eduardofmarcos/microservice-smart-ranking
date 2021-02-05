@@ -24,4 +24,22 @@ export class AppService {
       throw new RpcException(error.message);
     }
   }
+
+  async getCategories(): Promise<Category[]> {
+    try {
+      return await this.categoryModel.find();
+    } catch (error) {
+      this.logger.error(`error: ${JSON.stringify(error.message)}`);
+      throw new RpcException(error.message);
+    }
+  }
+
+  async getACategory(_id: string): Promise<Category> {
+    try {
+      return await this.categoryModel.findById({ _id: _id });
+    } catch (error) {
+      this.logger.error(`error: ${JSON.stringify(error.message)}`);
+      throw new RpcException(error.message);
+    }
+  }
 }
